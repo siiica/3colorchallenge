@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3色イラストお題ジェネレーター｜イラスト・デザイン練習用の配色パターン生成ツール</title>
+  <meta name="description" content="イラストのワンドロやデザイン練習、キャラクター制作に使える「3色イラストお題」をランダムで自動生成するツールです。類似色・アクセント・パステル・完全ランダムの4つのモードから、明度差（コントラスト）を考慮した実用的な配色パターンをワンクリックでシャッフル生成します。">
+  <meta name="keywords" content="3色イラストお題,配色ジェネレーター,イラスト練習,カラーパレット,デザイン配色,ワンドロお題">
+
+  <meta property="og:title" content="3色イラストお題ジェネレーター｜イラスト・デザイン練習用の配色パターン生成ツール">
+  <meta property="og:description" content="ボタン一つでメリハリのある3色のイラストお題を生成！イラストやデザインの練習、キャラクターの配色決めにおすすめです。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content=""> <meta property="og:image" content=""> <meta name="twitter:card" content="summary_large_image">
+
   <meta name="google-adsense-account" content="ca-pub-9020579405591147">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9020579405591147"
      crossorigin="anonymous"></script>
-  <title>3色お題</title>
+  
   <style>
     /* --- 全体レイアウト --- */
     body {
@@ -21,6 +31,16 @@
       min-height: 100vh;
     }
 
+    .main-wrapper {
+      width: 100%;
+      max-width: 700px; 
+      padding: 40px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     h1 {
       font-size: 1.8rem;
       color: #1A1A1A;
@@ -30,7 +50,7 @@
       gap: 8px;
     }
 
-    /* --- タブメニュー（基本：PC/タブレットサイズ） --- */
+    /* --- タブメニュー --- */
     .tabs {
       display: flex;
       background-color: #ffffff;
@@ -42,14 +62,12 @@
 
     .tab {
       padding: 10px 24px;
-      font-size: 0.95rem; /* PCでの文字サイズ */
+      font-size: 0.95rem;
       font-weight: bold;
       color: #666666;
       cursor: pointer;
       border-radius: 20px;
       transition: all 0.2s ease;
-      
-      /* ★追加：万が一、枠が狭くなっても絶対に改行させない設定 */
       white-space: nowrap; 
     }
 
@@ -59,26 +77,31 @@
       box-shadow: 0 2px 6px rgba(43, 53, 180, 0.2);
     }
 
-    /* 📱【重要】スマホ用のレスポンシブ設定（画面幅が480px以下の場合） */
+    /* 📱スマホ用のレスポンシブ設定 */
     @media screen and (max-width: 480px) {
+      .main-wrapper {
+        padding: 20px 10px;
+      }
+
       .tabs {
-        width: 90%;          /* 画面幅に合わせてタブ全体の幅をフィットさせる */
-        justify-content: space-between; /* 4つのタブを均等に綺麗に並べる */
+        width: 100%;
+        justify-content: space-between;
         padding: 4px;
+        box-sizing: border-box;
       }
       
       .tab {
-        padding: 8px 12px;   /* スマホ用に左右の余白をギュッと縮める */
-        font-size: 0.8rem;   /* ★スマホ用に文字サイズを小さく調整 */
+        padding: 8px 4px;
+        font-size: 0.78rem;
         text-align: center;
-        flex: 1;             /* 各タブが均等な幅になるように割り振る */
+        flex: 1;
       }
     }
 
-    /* --- カラーパネルコンテナ（隙間なし） --- */
+    /* --- カラーパネルコンテナ --- */
     .color-container {
       display: flex;
-      width: 90%;
+      width: 100%;
       max-width: 650px;
       height: 380px;
       margin: 0 auto 30px auto;
@@ -106,12 +129,21 @@
       letter-spacing: 0.5px;
     }
 
-    /* --- ボタン --- */
+    /* --- アクションエリア（ボタン配置） --- */
+    .action-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
     .shuffle-btn {
       background-color: #2B35B4;
       color: #ffffff;
       border: none;
-      padding: 14px 40px;
+      padding: 14px 50px;
       font-size: 1.1rem;
       font-weight: bold;
       border-radius: 30px;
@@ -126,6 +158,76 @@
 
     .shuffle-btn:active {
       transform: scale(0.97);
+    }
+
+    /* 🐦 X（Twitter）共有ボタンのスタイル */
+    .share-btn {
+      background-color: #1A1A1A;
+      color: #ffffff;
+      border: none;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.2s;
+    }
+    
+    .share-btn:hover {
+      background-color: #333333;
+    }
+
+    /* --- 📈 SEO対策：解説テキストエリアのスタイル --- */
+    .seo-content {
+      width: 100%;
+      max-width: 650px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .seo-content h2 {
+      font-size: 1.25rem;
+      color: #2B35B4;
+      margin-top: 0;
+      margin-bottom: 12px;
+      border-left: 4px solid #2B35B4;
+      padding-left: 10px;
+    }
+
+    .seo-content h3 {
+      font-size: 1rem;
+      color: #1A1A1A;
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    .seo-content p {
+      font-size: 0.88rem;
+      color: #444444;
+      line-height: 1.7;
+      margin: 0 0 12px 0;
+    }
+
+    .seo-content ul {
+      font-size: 0.88rem;
+      color: #444444;
+      line-height: 1.7;
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .seo-content li {
+      margin-bottom: 6px;
     }
 
     /* --- フッター --- */
@@ -156,7 +258,7 @@
       text-decoration: underline;
     }
 
-    /* --- ページ内ポップアップ（モーダル） --- */
+    /* --- ページ内ポップアップ --- */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -236,36 +338,61 @@
 </head>
 <body>
 
-  <h1>🎨 3色お題</h1>
+  <div class="main-wrapper">
 
-  <div class="tabs">
-    <div id="tab-analogous" class="tab active" onclick="changeMode('analogous')">類似色</div>
-    <div id="tab-accent" class="tab" onclick="changeMode('accent')">アクセント</div>
-    <div id="tab-pastel" class="tab" onclick="changeMode('pastel')">パステル</div>
-    <div id="tab-random" class="tab" onclick="changeMode('random')">完全ランダム</div>
-  </div>
+    <h1>🎨 3色イラストお題</h1>
 
-  <div class="color-container">
-    <div id="panel1" class="color-panel"><span id="code1" class="color-code">#FFFFFF</span></div>
-    <div id="panel2" class="color-panel"><span id="code2" class="color-code">#FFFFFF</span></div>
-    <div id="panel3" class="color-panel"><span id="code3" class="color-code">#FFFFFF</span></div>
-  </div>
-
-  <button class="shuffle-btn" onclick="shuffleColors()">色をシャッフル！</button>
-
-  <footer>
-    <p>© 2026 3色お題</p>
-    <div class="footer-links">
-      <button onclick="openModal()">プライバシーポリシー・免責事項</button>
+    <div class="tabs">
+      <div id="tab-analogous" class="tab active" onclick="changeMode('analogous')">類似色</div>
+      <div id="tab-accent" class="tab" onclick="changeMode('accent')">アクセント</div>
+      <div id="tab-pastel" class="tab" onclick="changeMode('pastel')">パステル</div>
+      <div id="tab-random" class="tab" onclick="changeMode('random')">完全ランダム</div>
     </div>
-  </footer>
+
+    <div class="color-container">
+      <div id="panel1" class="color-panel"><span id="code1" class="color-code">#FFFFFF</span></div>
+      <div id="panel2" class="color-panel"><span id="code2" class="color-code">#FFFFFF</span></div>
+      <div id="panel3" class="color-panel"><span id="code3" class="color-code">#FFFFFF</span></div>
+    </div>
+
+    <div class="action-area">
+      <button class="shuffle-btn" onclick="shuffleColors()">色をシャッフル！</button>
+      <a id="share-twitter" class="share-btn" href="#" target="_blank" rel="noopener noreferrer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        このお題をXに投稿する
+      </a>
+    </div>
+
+    <article class="seo-content">
+      <h2>3色イラストお題ジェネレーターとは？</h2>
+      <p>当サイトは、イラストのワンドロ練習や、デザインの配色パターン、キャラクターのカラーリング選定のインスピレーションを得るための「3色限定イラストお題」を自動生成するオンラインツールです。シャッフルボタンを押すだけで、3色の組み合わせを作り出します。</p>
+
+      <h3>4つのカラーモード</h3>
+      <p>目的や作品の方向性に合わせて、以下の4つのアルゴリズムから最適な配色スタイルを選ぶことができます。</p>
+      <ul>
+        <li><strong>類似色（Analogous）:</strong> 隣り合う近い色相を抽出し、明度のコントラストをハッキリつけました。統一感のある美しい画面構成や、イラストの陰影表現の練習に最適です。</li>
+        <li><strong>アクセント（Accent）:</strong> 明度差をつけた馴染み色と補色のアクセントカラーを固定。キャラクターデザインや、アイキャッチの強いロゴ・バナーの配色に効果的です。</li>
+        <li><strong>パステル（Pastel）:</strong> 明度が高く、彩度を抑えた柔らかいトーンの3色。ファンシーな世界観などのイラスト練習におすすめです。</li>
+        <li><strong>完全ランダム（Random）:</strong> 1,677万色の中から完全にランダムで3色を選出します。予想外の組み合わせに出会いたいときに。</li>
+      </ul>
+
+   </article>
+
+    <footer>
+      <p>© 2026 3色イラストお題</p>
+      <div class="footer-links">
+        <button onclick="openModal()">プライバシーポリシー・免責事項</button>
+      </div>
+    </footer>
+
+  </div>
 
   <div id="info-modal" class="modal-overlay" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <h2>プライバシーポリシー・免責事項</h2>
       
       <h3>1. 広告の配信について</h3>
-      <p>当サイトでは、第三者配信による広告サービス「Google AdSense」利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。ユーザーはブラウザの設定でCookieを無効にすることが可能です。</p>
+      <p>当サイトでは、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。ユーザーはブラウザの設定でCookieを無効にすることが可能です。</p>
       
       <h3>2. 免責事項</h3>
       <p>当サイトで生成されるカラーコードの組み合わせはプログラムにより選出されたものです。配色の利用によって生じたあらゆるトラブルや不利益について、当サイトは一切の責任を負いかねます。本ツールは個人の創作活動の参考としてご利用ください。</p>
@@ -305,23 +432,42 @@
       
       switch (mode) {
         case 'analogous':
-          return [
-            hslToHex(baseHue, 70, 50),
-            hslToHex((baseHue + 20) % 360, 65, 55),
-            hslToHex((baseHue + 40) % 360, 60, 45)
-          ];
+          if (Math.random() > 0.5) {
+            return [
+              hslToHex(baseHue, 75, 75),
+              hslToHex((baseHue + 20) % 360, 65, 45),
+              hslToHex((baseHue + 40) % 360, 80, 20)
+            ];
+          } else {
+            return [
+              hslToHex(baseHue, 80, 25),
+              hslToHex((baseHue + 15) % 360, 60, 55),
+              hslToHex((baseHue + 35) % 360, 70, 80)
+            ];
+          }
+
         case 'accent':
-          return [
-            hslToHex(baseHue, 60, 50),
-            hslToHex((baseHue + 15) % 360, 50, 60),
-            hslToHex((baseHue + 180) % 360, 90, 50)
-          ];
+          if (Math.random() > 0.5) {
+            return [
+              hslToHex(baseHue, 50, 45),
+              hslToHex((baseHue + 180) % 360, 95, 65),
+              hslToHex((baseHue + 35) % 360, 40, 15)
+            ];
+          } else {
+            return [
+              hslToHex(baseHue, 45, 85),
+              hslToHex((baseHue + 180) % 360, 95, 15),
+              hslToHex((baseHue + 30) % 360, 55, 50)
+            ];
+          }
+
         case 'pastel':
           return [
-            hslToHex(baseHue, 60, 85),
-            hslToHex((baseHue + 120) % 360, 55, 83),
-            hslToHex((baseHue + 240) % 360, 50, 87)
+            hslToHex(baseHue, 65, 88),
+            hslToHex((baseHue + 120) % 360, 60, 78),
+            hslToHex((baseHue + 240) % 360, 55, 70)
           ];
+
         case 'random':
         default:
           const randomHex = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
@@ -343,12 +489,35 @@
       shuffleColors();
     }
 
+    /* 🐦 追加：現在の配色を反映したX（Twitter）のシェアURLを動的に生成する処理 */
+    function updateShareButton(colors) {
+      const modeNames = {
+        'analogous': '類似色',
+        'accent': 'アクセント',
+        'pastel': 'パステル',
+        'random': '完全ランダム'
+      };
+      
+      const currentModeName = modeNames[currentMode] || '配色';
+      const colorText = `🎨3色イラストお題\nモード：${currentModeName}\n配色：${colors.join(' / ')}\n`;
+      const hashtags = '3色お題';
+      
+      // 現在のページのURL（未公開時は空欄、または設定したURL）を取得してエンコード
+      const currentUrl = window.location.href;
+      
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(colorText)}&url=${encodeURIComponent(currentUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
+      
+      document.getElementById('share-twitter').href = twitterUrl;
+    }
+
     function shuffleColors() {
       const colors = generateThreeColors(currentMode);
       for (let i = 1; i <= 3; i++) {
         document.getElementById(`panel${i}`).style.backgroundColor = colors[i - 1];
         document.getElementById(`code${i}`).textContent = colors[i - 1];
       }
+      // 色をシャッフルしたタイミングでXのシェアリンクも最新の色に更新する
+      updateShareButton(colors);
     }
 
     window.onload = shuffleColors;
