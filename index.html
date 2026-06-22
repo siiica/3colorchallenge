@@ -27,7 +27,7 @@
       gap: 8px;
     }
 
-    /* --- タブメニュー --- */
+    /* --- タブメニュー（基本：PC/タブレットサイズ） --- */
     .tabs {
       display: flex;
       background-color: #ffffff;
@@ -39,18 +39,37 @@
 
     .tab {
       padding: 10px 24px;
-      font-size: 0.95rem;
+      font-size: 0.95rem; /* PCでの文字サイズ */
       font-weight: bold;
       color: #666666;
       cursor: pointer;
       border-radius: 20px;
       transition: all 0.2s ease;
+      
+      /* ★追加：万が一、枠が狭くなっても絶対に改行させない設定 */
+      white-space: nowrap; 
     }
 
     .tab.active {
       background-color: #2B35B4;
       color: #ffffff;
       box-shadow: 0 2px 6px rgba(43, 53, 180, 0.2);
+    }
+
+    /* 📱【重要】スマホ用のレスポンシブ設定（画面幅が480px以下の場合） */
+    @media screen and (max-width: 480px) {
+      .tabs {
+        width: 90%;          /* 画面幅に合わせてタブ全体の幅をフィットさせる */
+        justify-content: space-between; /* 4つのタブを均等に綺麗に並べる */
+        padding: 4px;
+      }
+      
+      .tab {
+        padding: 8px 12px;   /* スマホ用に左右の余白をギュッと縮める */
+        font-size: 0.8rem;   /* ★スマホ用に文字サイズを小さく調整 */
+        text-align: center;
+        flex: 1;             /* 各タブが均等な幅になるように割り振る */
+      }
     }
 
     /* --- カラーパネルコンテナ（隙間なし） --- */
@@ -119,7 +138,6 @@
       margin-top: 8px;
     }
 
-    /* 合体した1つのボタン用のスタイル */
     .footer-links button {
       background: none;
       border: none;
@@ -190,7 +208,6 @@
       line-height: 1.6;
     }
 
-    /* モーダル内のGoogleフォームのリンクカラー */
     .modal-content a {
       color: #2B35B4;
       text-decoration: none;
@@ -222,7 +239,7 @@
     <div id="tab-analogous" class="tab active" onclick="changeMode('analogous')">類似色</div>
     <div id="tab-accent" class="tab" onclick="changeMode('accent')">アクセント</div>
     <div id="tab-pastel" class="tab" onclick="changeMode('pastel')">パステル</div>
-    <div id="tab-random" class="tab" onclick="changeMode('random')">ランダム</div>
+    <div id="tab-random" class="tab" onclick="changeMode('random')">完全ランダム</div>
   </div>
 
   <div class="color-container">
@@ -245,7 +262,7 @@
       <h2>プライバシーポリシー・免責事項</h2>
       
       <h3>1. 広告の配信について</h3>
-      <p>当サイトでは、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。ユーザーはブラウザの設定でCookieを無効にすることが可能です。</p>
+      <p>当サイトでは、第三者配信による広告サービス「Google AdSense」利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。ユーザーはブラウザの設定でCookieを無効にすることが可能です。</p>
       
       <h3>2. 免責事項</h3>
       <p>当サイトで生成されるカラーコードの組み合わせはプログラムにより選出されたものです。配色の利用によって生じたあらゆるトラブルや不利益について、当サイトは一切の責任を負いかねます。本ツールは個人の創作活動の参考としてご利用ください。</p>
@@ -260,13 +277,11 @@
   <script>
     let currentMode = 'analogous';
 
-    // モーダルを開閉するシンプルな関数
     function openModal() {
       document.getElementById('info-modal').classList.add('show');
     }
 
     function closeModal() {
-      document.getElementById('info-modal').classList.remove('remove'); // 念のため
       document.getElementById('info-modal').classList.remove('show');
     }
 
