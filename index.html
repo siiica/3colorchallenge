@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>3色イラストお題ジェネレーター｜イラスト・デザイン練習用の配色パターン生成ツール</title>
-  <meta name="description" content="イラストのワンドロやデザイン練習、キャラクター制作に使える「3色イラストお題」をランダムで自動生成するツールです。類似色・アクセント・パステル・完全ランダムの4つのモードから、明度差（コントラスト）を考慮した実用的な配色パターンをワンクリックでシャッフル生成します。">
+  <meta name="description" content="イラストのワンドロやデザイン練習、キャラクター制作に使える「3色イラストお題」をランダムで自動生成するツールです。類似色・アクセント・パステル・ランダムの4つのモードから、明度差（コントラスト）を考慮した実用的な配色パターンをワンクリックでシャッフル生成します。">
   <meta name="keywords" content="3色イラストお題,配色ジェネレーター,イラスト練習,カラーパレット,デザイン配色,ワンドロお題">
 
   <meta property="og:title" content="3色イラストお題ジェネレーター｜イラスト・デザイン練習用の配色パターン生成ツール">
   <meta property="og:description" content="ボタン一つでメリハリのある3色のイラストお題を生成！イラストやデザインの練習、キャラクターの配色決めにおすすめです。">
   <meta property="og:type" content="website">
-  <meta property="og:url" content=""> <meta property="og:image" content=""> <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content=""> 
+  <meta property="og:image" content=""> 
+  <meta name="twitter:card" content="summary_large_image">
 
   <meta name="google-adsense-account" content="ca-pub-9020579405591147">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9020579405591147"
@@ -182,7 +184,7 @@
       background-color: #333333;
     }
 
-    /* --- 📈 SEO対策：解説テキストエリアのスタイル --- */
+    /* --- 📈 SEO・審査用：解説テキストエリアのスタイル --- */
     .seo-content {
       width: 100%;
       max-width: 650px;
@@ -198,16 +200,19 @@
     .seo-content h2 {
       font-size: 1.25rem;
       color: #2B35B4;
-      margin-top: 0;
+      margin-top: 28px;
       margin-bottom: 12px;
       border-left: 4px solid #2B35B4;
       padding-left: 10px;
+    }
+    .seo-content h2:first-of-type {
+      margin-top: 0;
     }
 
     .seo-content h3 {
       font-size: 1rem;
       color: #1A1A1A;
-      margin-top: 24px;
+      margin-top: 20px;
       margin-bottom: 8px;
     }
 
@@ -215,14 +220,14 @@
       font-size: 0.88rem;
       color: #444444;
       line-height: 1.7;
-      margin: 0 0 12px 0;
+      margin: 0 0 14px 0;
     }
 
-    .seo-content ul {
+    .seo-content ul, .seo-content ol {
       font-size: 0.88rem;
       color: #444444;
       line-height: 1.7;
-      margin: 0;
+      margin: 0 0 14px 0;
       padding-left: 20px;
     }
 
@@ -241,6 +246,7 @@
 
     .footer-links {
       margin-top: 8px;
+      margin-bottom: 20px;
     }
 
     .footer-links button {
@@ -256,6 +262,18 @@
 
     .footer-links button:hover {
       text-decoration: underline;
+    }
+
+    .visible-policy {
+      max-width: 650px;
+      font-size: 0.75rem;
+      color: #777777;
+      text-align: left;
+      background-color: #f5f6fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      line-height: 1.5;
     }
 
     /* --- ページ内ポップアップ --- */
@@ -340,43 +358,51 @@
 
   <div class="main-wrapper">
 
-    <h1>🎨 3色イラストお題</h1>
+    <header>
+      <h1>🎨 3色イラストお題</h1>
+    </header>
 
-    <div class="tabs">
-      <div id="tab-analogous" class="tab active" onclick="changeMode('analogous')">類似色</div>
-      <div id="tab-accent" class="tab" onclick="changeMode('accent')">アクセント</div>
-      <div id="tab-pastel" class="tab" onclick="changeMode('pastel')">パステル</div>
-      <div id="tab-random" class="tab" onclick="changeMode('random')">完全ランダム</div>
-    </div>
+    <main style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <div class="tabs">
+        <div id="tab-analogous" class="tab active" onclick="changeMode('analogous')">類似色</div>
+        <div id="tab-accent" class="tab" onclick="changeMode('accent')">アクセント</div>
+        <div id="tab-pastel" class="tab" onclick="changeMode('pastel')">パステル</div>
+        <div id="tab-random" class="tab" onclick="changeMode('random')">ランダム</div>
+      </div>
 
-    <div class="color-container">
-      <div id="panel1" class="color-panel"><span id="code1" class="color-code">#FFFFFF</span></div>
-      <div id="panel2" class="color-panel"><span id="code2" class="color-code">#FFFFFF</span></div>
-      <div id="panel3" class="color-panel"><span id="code3" class="color-code">#FFFFFF</span></div>
-    </div>
+      <div class="color-container">
+        <div id="panel1" class="color-panel"><span id="code1" class="color-code">#FFFFFF</span></div>
+        <div id="panel2" class="color-panel"><span id="code2" class="color-code">#FFFFFF</span></div>
+        <div id="panel3" class="color-panel"><span id="code3" class="color-code">#FFFFFF</span></div>
+      </div>
 
-    <div class="action-area">
-      <button class="shuffle-btn" onclick="shuffleColors()">色をシャッフル！</button>
-      <a id="share-twitter" class="share-btn" href="#" target="_blank" rel="noopener noreferrer">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        このお題をXに投稿する
-      </a>
-    </div>
+      <div class="action-area">
+        <button class="shuffle-btn" onclick="shuffleColors()">色をシャッフル！</button>
+        <a id="share-twitter" class="share-btn" href="#" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          このお題をXに投稿する
+        </a>
+      </div>
 
-    <article class="seo-content">
-      <h2>3色イラストお題ジェネレーターとは？</h2>
-      <p>当サイトは、イラストのワンドロ練習や、デザインの配色パターン、キャラクターのカラーリング選定のインスピレーションを得るための「3色限定イラストお題」を自動生成するオンラインツールです。シャッフルボタンを押すだけで、3色の組み合わせを作り出します。</p>
+      <article class="seo-content">
+        <h2>3色イラストお題ジェネレーターとは？</h2>
+        <p>当サイトは、イラストレーター、デザイナー、絵描きを趣味とするすべてのクリエイターを対象とした「3色限定イラストお題」のカラー自動生成ツールです。ワンドロ（1時間ドローイング）の練習やキャラクターデザイン、新しいイラストのカラーパレット選定におけるインスピレーションを刺激するために最適化されています。ワンクリックで無限に実用的な3色の組み合わせを構築します。</p>
 
-      <h3>4つのカラーモード</h3>
-      <p>目的や作品の方向性に合わせて、以下の4つのアルゴリズムから最適な配色スタイルを選ぶことができます。</p>
-      <ul>
-        <li><strong>類似色（Analogous）:</strong> 隣り合う近い色相を抽出し、明度のコントラストをハッキリつけました。統一感のある美しい画面構成や、イラストの陰影表現の練習に最適です。</li>
-        <li><strong>アクセント（Accent）:</strong> 明度差をつけた馴染み色と補色のアクセントカラーを固定。キャラクターデザインや、アイキャッチの強いロゴ・バナーの配色に効果的です。</li>
-        <li><strong>パステル（Pastel）:</strong> 明度が高く、彩度を抑えた柔らかいトーンの3色。ファンシーな世界観などのイラスト練習におすすめです。</li>
-        <li><strong>完全ランダム（Random）:</strong> 1,677万色の中から完全にランダムで3色を選出します。予想外の組み合わせに出会いたいときに。</li>
-      </ul>
+        <h2>4つの厳選されたカラー生成アルゴリズム</h2>
+        <p>表現したい作風や創作の課題に合わせて、4つの独自のモードからカラーコードをシャッフル生成できます。</p>
+        <ul>
+          <li><strong>類似色（Analogous）:</strong> 色相環で隣り合う親和性の高いカラーをベースに選びつつ、画面がボヤけないよう明度のコントラスト（明るさの強弱）を確実に持たせた設計です。統一感を持たせつつ、しっかり奥行きのあるイラスト背景や陰影表現を磨きたいときに有効です。</li>
+          <li><strong>アクセント（Accent）:</strong> 左右のパネルには彩度や明度を調整したお互いに馴染むベースカラーを配置し、最も視線を集めたい中央のパネルにのみ、対照的な「補色（反対色）」のアクセントカラーを確定で配置します。キャラクターの髪と目の対比、ワンポイントの小物を際立たせるイラスト構図の訓練に直結します。</li>
+          <li><strong>パステル（Pastel）:</strong> 彩度を優しくコントロールし、全体の明度を高水準にキープした3色をマージします。ファンシー、ゆめかわいい、淡い水彩風のイラストやポップなライトノベル調の色彩構成を一発で引き当てます。</li>
+          <li><strong>ランダム（Random）:</strong> デジタルカラーの全1,677万色から完全にランダムで抽出するモードです。人間が意図的に避けるような奇抜な組み合わせや、自分自身の固定観念にはない予想外の色彩に出会うことができ、表現の限界突破に最適です。</li>
+        </ul>
+      </article>
+    </main>
 
-   </article>
+    <section class="visible-policy">
+      <strong>【サイト運営情報・免責事項】</strong><br>
+      当サイト（3色イラストお題ジェネレーター）では、第三者配信の広告サービス「Google AdSense」を利用し、ユーザーの利便性向上および興味に応じた広告配信のためにCookie（クッキー）を使用することがあります。これらのCookie情報は匿名で収集されており、個人を特定するものではありません。ブラウザの設定によりCookieを無効化することが可能です。また、当ツールで生成される配色データはプログラムによる機械選出であり、利用によって生じた直接・間接的な損害等について運営者は一切の責任を負いません。
+    </section>
 
     <footer>
       <p>© 2026 3色イラストお題</p>
@@ -390,16 +416,12 @@
   <div id="info-modal" class="modal-overlay" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <h2>プライバシーポリシー・免責事項</h2>
-      
       <h3>1. 広告の配信について</h3>
       <p>当サイトでは、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。ユーザーはブラウザの設定でCookieを無効にすることが可能です。</p>
-      
       <h3>2. 免責事項</h3>
       <p>当サイトで生成されるカラーコードの組み合わせはプログラムにより選出されたものです。配色の利用によって生じたあらゆるトラブルや不利益について、当サイトは一切の責任を負いかねます。本ツールは個人の創作活動の参考としてご利用ください。</p>
-      
       <h3>3. お問い合わせ先</h3>
       <p>当サイトに関するお問い合わせ、ご意見がございましたら、こちらの【<a href="https://forms.gle/QCFQCz5ri9iKi6YQ9" target="_blank" rel="noopener noreferrer">お問い合わせフォーム</a>】よりご連絡ください。</p>
-
       <button class="modal-close-btn" onclick="closeModal()">閉じる</button>
     </div>
   </div>
@@ -489,22 +511,18 @@
       shuffleColors();
     }
 
-    /* 🐦 追加：現在の配色を反映したX（Twitter）のシェアURLを動的に生成する処理 */
     function updateShareButton(colors) {
       const modeNames = {
         'analogous': '類似色',
         'accent': 'アクセント',
         'pastel': 'パステル',
-        'random': '完全ランダム'
+        'random': 'ランダム'
       };
       
       const currentModeName = modeNames[currentMode] || '配色';
       const colorText = `🎨3色イラストお題\nモード：${currentModeName}\n配色：${colors.join(' / ')}\n`;
       const hashtags = '3色お題';
-      
-      // 現在のページのURL（未公開時は空欄、または設定したURL）を取得してエンコード
       const currentUrl = window.location.href;
-      
       const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(colorText)}&url=${encodeURIComponent(currentUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
       
       document.getElementById('share-twitter').href = twitterUrl;
@@ -516,7 +534,6 @@
         document.getElementById(`panel${i}`).style.backgroundColor = colors[i - 1];
         document.getElementById(`code${i}`).textContent = colors[i - 1];
       }
-      // 色をシャッフルしたタイミングでXのシェアリンクも最新の色に更新する
       updateShareButton(colors);
     }
 
